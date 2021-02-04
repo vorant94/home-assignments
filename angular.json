@@ -1,0 +1,147 @@
+{
+  "version": 1,
+  "projects": {
+    "pivot-table": {
+      "projectType": "application",
+      "root": "apps/pivot-table",
+      "sourceRoot": "apps/pivot-table/src",
+      "prefix": "home-assignments",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/pivot-table",
+            "index": "apps/pivot-table/src/index.html",
+            "main": "apps/pivot-table/src/main.ts",
+            "polyfills": "apps/pivot-table/src/polyfills.ts",
+            "tsConfig": "apps/pivot-table/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/pivot-table/src/favicon.ico",
+              "apps/pivot-table/src/assets"
+            ],
+            "styles": ["apps/pivot-table/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/pivot-table/src/environments/environment.ts",
+                  "with": "apps/pivot-table/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "pivot-table:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "pivot-table:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "pivot-table:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/pivot-table/src/**/*.ts",
+              "apps/pivot-table/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/pivot-table"],
+          "options": {
+            "jestConfig": "apps/pivot-table/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "pivot-table-e2e": {
+      "root": "apps/pivot-table-e2e",
+      "sourceRoot": "apps/pivot-table-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/pivot-table-e2e/cypress.json",
+            "tsConfig": "apps/pivot-table-e2e/tsconfig.e2e.json",
+            "devServerTarget": "pivot-table:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "pivot-table:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/pivot-table-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular",
+    "packageManager": "yarn"
+  },
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
+  "defaultProject": "pivot-table"
+}
