@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { TableService } from './table.service';
 import { SectionDto } from './dtos/section.dto';
-import { KeyValue } from '@angular/common';
 import { ZoneDto } from './dtos/zone.dto';
 import { CoordsModel } from './models/coords.model';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -12,49 +12,58 @@ import { CoordsModel } from './models/coords.model';
   styleUrls: ['./table.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class TableComponent implements OnInit {
+export class TableComponent implements OnInit, OnDestroy {
 
   sections: Record<string, SectionDto>[] = [];
   zones: ZoneDto[] = [];
 
   activeCoords: CoordsModel;
 
+  private sub$: Subscription;
+
   constructor(
     private readonly tableService: TableService
   ) {
   }
 
-  originalOrder = (a: KeyValue<number, string>, b: KeyValue<number, string>): number => {
+  originalOrder = (): number => {
     return 0;
   };
 
-  ngOnInit() {
-    this.tableService.getData()
-      .subscribe(({ zones, sections }) => {
-        const items: { [key: string]: SectionDto } = {};
-        sections.forEach(section => {
-          items[`${section.sourceGuid}${section.destinationGuid}`] = section;
-        });
-
-        this.zones = [];
-
-        this.sections = zones
-          .map(zone => {
-            this.zones.push(zone);
-
-            return zones
-              .reduce((acc, { guid: yGuid }) => ({
-                ...acc,
-                [yGuid]: items[zone.guid + yGuid]
-              }), {});
-          });
-
-        console.log(this.sections);
-      });
+  ngOnInit(): void {
+    this.fetchData();
   }
 
-  onCellMouseover(coords?: CoordsModel) {
-    this.activeCoords = coords ? { ...coords } : null;
+  ngOnDestroy(): void {
+    this.sub$?.unsubscribe();
+  }
+
+  onCellMouseover(coords: CoordsModel): void {
+    this.activeCoords = coords;
+  }
+
+  onTableMouseleave(): void {
+    this.activeCoords = null;
+  }
+
+  private fetchData(): void {
+    this.sub$ = this.tableService.getData()
+      .subscribe(({ zones, sections }) => {
+        this.zones = [...zones];
+
+        const temp: Record<string, SectionDto> = sections
+          .reduce((acc, curr) => ({
+            ...acc,
+            [`${curr.sourceGuid}${curr.destinationGuid}`]: curr
+          }), {});
+
+        this.sections = zones
+          .map(zone => zones
+            .reduce((acc, { guid: yGuid }) => ({
+              ...acc,
+              [yGuid]: temp[zone.guid + yGuid]
+            }), {}));
+      });
   }
 
 }

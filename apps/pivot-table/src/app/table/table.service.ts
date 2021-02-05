@@ -5,6 +5,7 @@ import { MatrixResponseDto } from './dtos/matrix-response.dto';
 import { ZoneDto } from './dtos/zone.dto';
 import { SectionDto } from './dtos/section.dto';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,4 +19,5 @@ export class TableService {
   getData(): Observable<MatrixResponseDto<ZoneDto, SectionDto>> {
     return this.httpClient.get<MatrixResponseDto<ZoneDto, SectionDto>>('./assets/zones.json');
   }
+
 }
