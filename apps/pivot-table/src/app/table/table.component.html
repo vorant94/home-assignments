@@ -20,7 +20,7 @@
     </th>
   </tr>
 
-  <tr *ngFor='let row of sections; let yIndex = index'>
+  <tr *ngFor='let row of zones; let yIndex = index'>
     <th class='data-cell'
         haHighlightHeaderCell
         [activeCoords]='activeCoords'
@@ -33,14 +33,14 @@
         </div>
       </div>
     </th>
-    <td *ngFor='let cell of row | keyvalue :originalOrder; let xIndex = index'
+    <td *ngFor='let cell of zones; let xIndex = index'
         class='data-cell'
-        [class.striped-cell]='xIndex === yIndex && !cell.value'
         haHighlightDataCell
         [activeCoords]='activeCoords'
         [currentCoords]='{y: yIndex, x: xIndex}'
+        [section]='sectionsMap[row.guid + cell.guid]'
         (mouseover)='onCellMouseover({x: xIndex, y: yIndex})'>
-      <div *ngIf='cell.value as section'
+      <div *ngIf='sectionsMap[row.guid + cell.guid] as section'
            class='inner-data-cell'>
         <mat-progress-bar mode='determinate'
                           color='accent'

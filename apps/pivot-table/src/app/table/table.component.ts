@@ -14,21 +14,17 @@ import { Subscription } from 'rxjs';
 })
 export class TableComponent implements OnInit, OnDestroy {
 
-  sections: Record<string, SectionDto>[] = [];
+  sectionsMap: Record<string, SectionDto> = {};
   zones: ZoneDto[] = [];
 
-  activeCoords: CoordsModel;
+  activeCoords: CoordsModel | undefined;
 
-  private sub$: Subscription;
+  private sub$: Subscription | undefined;
 
   constructor(
     private readonly tableService: TableService
   ) {
   }
-
-  originalOrder = (): number => {
-    return 0;
-  };
 
   ngOnInit(): void {
     this.fetchData();
@@ -51,18 +47,11 @@ export class TableComponent implements OnInit, OnDestroy {
       .subscribe(({ zones, sections }) => {
         this.zones = [...zones];
 
-        const temp: Record<string, SectionDto> = sections
+        this.sectionsMap = sections
           .reduce((acc, curr) => ({
             ...acc,
             [`${curr.sourceGuid}${curr.destinationGuid}`]: curr
           }), {});
-
-        this.sections = zones
-          .map(zone => zones
-            .reduce((acc, { guid: yGuid }) => ({
-              ...acc,
-              [yGuid]: temp[zone.guid + yGuid]
-            }), {}));
       });
   }
 

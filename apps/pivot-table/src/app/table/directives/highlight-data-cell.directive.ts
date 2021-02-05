@@ -1,10 +1,13 @@
-import { Directive, HostBinding } from '@angular/core';
+import { Directive, HostBinding, Input } from '@angular/core';
 import { AbstractHighlightDirective } from './abstract-highlight.directive';
+import { SectionDto } from '../dtos/section.dto';
 
 @Directive({
-  selector: '[haHighlightDataCell][activeCoords][currentCoords]'
+  selector: '[haHighlightDataCell][activeCoords][currentCoords][section]'
 })
 export class HighlightDataCellDirective extends AbstractHighlightDirective {
+
+  @Input() section: SectionDto;
 
   constructor() {
     super();
@@ -34,6 +37,13 @@ export class HighlightDataCellDirective extends AbstractHighlightDirective {
       && this.activeCoords.y === this.currentCoords.y;
 
     return isSubActiveX || isSubActiveY;
+  }
+
+  @HostBinding('class.striped-cell')
+  get isStripedCell(): boolean {
+    const isDiagonal: boolean = this.currentCoords.x === this.currentCoords.y;
+
+    return isDiagonal && !this.section;
   }
 
 }
