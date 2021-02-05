@@ -5,22 +5,61 @@
   $dar-config: mat-get-color-config($dark);
   $dark-primary: map-get($dar-config, primary);
 
+  $striped-background-1: #E7F5F5;
+
   ha-table {
     table {
       tr {
         th,
         td {
           &.data-cell {
+
+            &.striped-cell {
+              background: repeating-linear-gradient(
+                  -45deg,
+                  $striped-background-1,
+                  $striped-background-1 2.5px,
+                  #E3E4E6 2.5px,
+                  #E3E4E6 10px
+              );
+            }
+
             &.active {
-              background-color: mat-color($light-primary);
-              color: mat-color($dark-primary, default-contrast);
+              &:not(.striped-cell) {
+                background: mat-color($light-primary);
+                color: mat-color($dark-primary, default-contrast);
+              }
+
+              &.striped-cell {
+                background: repeating-linear-gradient(
+                    -45deg,
+                    mat-color($light-primary, lighter),
+                    mat-color($light-primary, lighter) 2.5px,
+                    mat-color($light-primary) 2.5px,
+                    mat-color($light-primary) 10px
+                );
+              }
             }
           }
 
           &.header-cell,
           &.data-cell {
             &.sub-active {
-              background-color: mat-color($light-primary, lighter);
+              &:not(.striped-cell) {
+                &:not(.striped-cell) {
+                  background: mat-color($light-primary, lighter) !important;
+                }
+              }
+
+              &.striped-cell {
+                background: repeating-linear-gradient(
+                    -45deg,
+                    $striped-background-1,
+                    $striped-background-1 2.5px,
+                    mat-color($light-primary, lighter) 2.5px,
+                    mat-color($light-primary, lighter) 10px
+                );
+              }
             }
           }
         }

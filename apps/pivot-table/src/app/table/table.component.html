@@ -35,6 +35,7 @@
     </th>
     <td *ngFor='let cell of row | keyvalue :originalOrder; let xIndex = index'
         class='data-cell'
+        [class.striped-cell]='xIndex === yIndex && !cell.value'
         haHighlightDataCell
         [activeCoords]='activeCoords'
         [currentCoords]='{y: yIndex, x: xIndex}'
