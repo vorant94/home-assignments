@@ -1,15 +1,5 @@
-@import '../assets/styles/theme/default';
-
-@mixin app-mixin($config-or-theme) {
-  $config: mat-get-color-config($config-or-theme);
-  $background: map-get($config, background);
-
-  :host {
-    background-color: mat-color($background, 'card');
-    padding: 48px;
-    display: block;
-    height: 100vh;
-  }
+ha-root {
+  padding: 48px;
+  display: block;
+  height: 100vh;
 }
-
-@include app-mixin($pivot-table-light-theme)

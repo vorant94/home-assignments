@@ -1,0 +1,10 @@
+@mixin app-mixin($config-or-theme) {
+  $config: mat-get-color-config($config-or-theme);
+  $background: map-get($config, background);
+
+  ha-root {
+    background-color: mat-color($background, 'card');
+  }
+}
+
+@include app-mixin($pivot-table-light-theme)

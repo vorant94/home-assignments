@@ -1,17 +1,6 @@
-@import '../../assets/styles/theme/default';
-@import "../../assets/styles/theme/dark";
+$border-color: rgba(0, 0, 0, .25);
 
-
-@mixin table-mixin($light, $dark) {
-  $light-config: mat-get-color-config($light);
-  $light-primary: map-get($light-config, primary);
-
-  $dar-config: mat-get-color-config($dark);
-  $dark-primary: map-get($dar-config, primary);
-
-  $border-color: rgba(0, 0, 0, .25);
-
-
+ha-table {
   table {
     border-collapse: collapse;
 
@@ -27,15 +16,8 @@
           padding: 10px;
         }
 
-        &.data-cell {
-          &.active {
-            background-color: mat-color($light-primary);
-            color: mat-color($dark-primary, default-contrast);
-          }
-        }
-
         &.corner-cell {
-          background-image: linear-gradient(to bottom left,  transparent calc(50% - 1px), $border-color, transparent calc(50% + 1px));
+          background-image: linear-gradient(to bottom left, transparent calc(50% - 1px), $border-color, transparent calc(50% + 1px));
           position: relative;
 
           .top-right,
@@ -58,10 +40,6 @@
         &.data-cell {
           width: 300px;
           height: 60px;
-
-          &.sub-active {
-            background-color: mat-color($light-primary, lighter);
-          }
 
           .inner-header-cell {
             text-align: left;
@@ -89,7 +67,3 @@
     }
   }
 }
-
-@include table-mixin($pivot-table-light-theme, $pivot-table-dark-theme)
-
-

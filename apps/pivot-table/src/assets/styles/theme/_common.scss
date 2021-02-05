@@ -1,0 +1,8 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$pivot-table-primary: mat-palette($mat-indigo);
+$pivot-table-accent: mat-palette($mat-pink, A200, A100, A400);
+
+$pivot-table-warn: mat-palette($mat-red);

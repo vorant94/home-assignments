@@ -1,0 +1,32 @@
+@mixin table-mixin($light, $dark) {
+  $light-config: mat-get-color-config($light);
+  $light-primary: map-get($light-config, primary);
+
+  $dar-config: mat-get-color-config($dark);
+  $dark-primary: map-get($dar-config, primary);
+
+  ha-table {
+    table {
+      tr {
+        th,
+        td {
+          &.data-cell {
+            &.active {
+              background-color: mat-color($light-primary);
+              color: mat-color($dark-primary, default-contrast);
+            }
+          }
+
+          &.header-cell,
+          &.data-cell {
+            &.sub-active {
+              background-color: mat-color($light-primary, lighter);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@include table-mixin($pivot-table-light-theme, $pivot-table-dark-theme)
