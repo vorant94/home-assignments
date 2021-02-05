@@ -1,7 +1,7 @@
 FROM node:alpine as builder
 
 WORKDIR /app
-COPY package.json yarn.lock decorate-angular-cli.js ./
+COPY package.json package-lock.json decorate-angular-cli.js ./
 RUN npm install
 
 COPY . .
