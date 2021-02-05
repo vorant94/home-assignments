@@ -3,6 +3,7 @@ import { TableService } from './table.service';
 import { SectionDto } from './dtos/section.dto';
 import { KeyValue } from '@angular/common';
 import { ZoneDto } from './dtos/zone.dto';
+import { CoordsModel } from './models/coords.model';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class TableComponent implements OnInit {
   sections: Record<string, SectionDto>[] = [];
   zones: ZoneDto[] = [];
 
-  activeCoords: { x: number, y: number };
+  activeCoords: CoordsModel;
 
   constructor(
     private readonly tableService: TableService
@@ -51,8 +52,8 @@ export class TableComponent implements OnInit {
       });
   }
 
-  onCellMouseover(x: number, y: number) {
-    this.activeCoords = { x, y };
+  onCellMouseover(coords?: CoordsModel) {
+    this.activeCoords = coords ? { ...coords } : null;
   }
 
 }

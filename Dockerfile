@@ -1,11 +1,11 @@
 FROM node:alpine as builder
 
 WORKDIR /app
-COPY package.json package-lock.json decorate-angular-cli.js ./
-RUN npm install
+COPY package.json yarn.lock decorate-angular-cli.js ./
+RUN yarn install
 
 COPY . .
-RUN npm run build -- --output-path=dist/
+RUN yarn run build --prod --output-path=dist/
 
 FROM nginx:alpine
 

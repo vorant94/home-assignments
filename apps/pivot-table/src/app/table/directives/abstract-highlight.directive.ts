@@ -1,15 +1,17 @@
 import { Directive, Input } from '@angular/core';
+import { CoordsModel } from '../models/coords.model';
 
 @Directive()
 export abstract class AbstractHighlightDirective {
 
   @Input()
-  activeCoords: { x: number, y: number };
+  activeCoords: CoordsModel;
 
   @Input()
-  currentCoords: { x: number, y: number };
+  currentCoords: CoordsModel;
 
-  protected constructor() { }
+  protected constructor() {
+  }
 
   protected get areCoordsInvalid(): boolean {
     return !this.activeCoords || !this.currentCoords;

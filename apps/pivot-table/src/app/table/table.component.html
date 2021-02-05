@@ -1,4 +1,4 @@
-<table>
+<table (mouseleave)='onCellMouseover()'>
   <tr>
     <th [colSpan]='zones.length + 1'
         class='title-cell'>
@@ -38,7 +38,7 @@
         haHighlightDataCell
         [activeCoords]='activeCoords'
         [currentCoords]='{y: yIndex, x: xIndex}'
-        (mouseover)='onCellMouseover(xIndex, yIndex)'>
+        (mouseover)='onCellMouseover({x: xIndex, y: yIndex})'>
       <div *ngIf='cell.value as section'
            class='inner-data-cell'>
         <mat-progress-bar mode='determinate'
