@@ -1,0 +1,10 @@
+version: '3.1'
+
+services:
+  pivot-table:
+    container_name: pivot-table
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4201:80"
