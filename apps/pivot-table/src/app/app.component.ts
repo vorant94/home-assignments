@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'home-assignments-root',
+  selector: 'ha-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })

@@ -1,0 +1,7 @@
+$pivot-table-dark-theme: mat-dark-theme((
+  color: (
+    primary: $pivot-table-primary,
+    accent: $pivot-table-accent,
+    warn: $pivot-table-warn,
+  )
+));

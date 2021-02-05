@@ -3,9 +3,14 @@
   "projects": {
     "pivot-table": {
       "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "root": "apps/pivot-table",
       "sourceRoot": "apps/pivot-table/src",
-      "prefix": "home-assignments",
+      "prefix": "ha",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -20,7 +25,9 @@
               "apps/pivot-table/src/favicon.ico",
               "apps/pivot-table/src/assets"
             ],
-            "styles": ["apps/pivot-table/src/styles.scss"],
+            "styles": [
+              "apps/pivot-table/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -81,7 +88,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/pivot-table"],
+          "outputs": [
+            "coverage/apps/pivot-table"
+          ],
           "options": {
             "jestConfig": "apps/pivot-table/jest.config.js",
             "passWithNoTests": true
@@ -110,7 +119,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/pivot-table-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/pivot-table-e2e/**/*.{js,ts}"
+            ]
           }
         }
       }
@@ -118,7 +129,8 @@
   },
   "cli": {
     "defaultCollection": "@nrwl/angular",
-    "packageManager": "yarn"
+    "packageManager": "yarn",
+    "analytics": "90f9ffa7-b740-4cf0-9739-bb459f67d847"
   },
   "schematics": {
     "@nrwl/angular": {

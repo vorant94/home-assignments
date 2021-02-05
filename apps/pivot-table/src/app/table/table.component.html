@@ -1,0 +1,58 @@
+<table>
+  <tr>
+    <th [colSpan]='zones.length + 1'
+        class='title-cell'>
+      NIST - Access Policy Compliance Matrix
+    </th>
+  </tr>
+
+  <tr>
+    <th class='header-cell corner-cell'>
+      <div class='top-right mat-caption'>Destination</div>
+      <div class='bottom-left mat-caption'>Source</div>
+    </th>
+    <th *ngFor='let header of zones; let xIndex = index'
+        haHighlightHeaderCell
+        [activeCoords]='activeCoords'
+        [currentCoords]='{x: xIndex, y: -1}'
+        class='header-cell'>
+      {{header.name}}
+    </th>
+  </tr>
+
+  <tr *ngFor='let row of sections; let yIndex = index'>
+    <th class='data-cell'
+        haHighlightHeaderCell
+        [activeCoords]='activeCoords'
+        [currentCoords]='{x: -1, y: yIndex}'>
+      <div class='inner-header-cell'>
+        <span>{{zones[yIndex].name}}</span>
+        <div class='info-row'>
+          <mat-icon>post_add</mat-icon>
+          <span>{{zones[yIndex].complianceLevel}}%</span>
+        </div>
+      </div>
+    </th>
+    <td *ngFor='let cell of row | keyvalue :originalOrder; let xIndex = index'
+        class='data-cell'
+        haHighlightDataCell
+        [activeCoords]='activeCoords'
+        [currentCoords]='{y: yIndex, x: xIndex}'
+        (mouseover)='onCellMouseover(xIndex, yIndex)'>
+      <div *ngIf='cell.value as section'
+           class='inner-data-cell'>
+        <mat-progress-bar mode='determinate'
+                          color='accent'
+                          [value]='section.complianceLevel'></mat-progress-bar>
+        <div class='info-row'>
+          <mat-icon>post_add</mat-icon>
+          <span>{{section.complianceLevel}}%</span>
+        </div>
+        <div class='info-row'>
+          <mat-icon>warning_amber</mat-icon>
+          <span>{{section.violationsCount}}</span>
+        </div>
+      </div>
+    </td>
+  </tr>
+</table>

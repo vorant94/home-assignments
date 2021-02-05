@@ -14,7 +14,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "home-assignments",
+            "prefix": "ha",
             "style": "camelCase"
           }
         ],
@@ -22,7 +22,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "home-assignments",
+            "prefix": "ha",
             "style": "kebab-case"
           }
         ]
