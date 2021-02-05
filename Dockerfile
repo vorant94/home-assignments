@@ -5,7 +5,7 @@ COPY package.json yarn.lock decorate-angular-cli.js ./
 RUN yarn install
 
 COPY . .
-RUN yarn run build -- --output-path=dist/
+RUN yarn run build --output-path=dist/
 
 FROM nginx:alpine
 
