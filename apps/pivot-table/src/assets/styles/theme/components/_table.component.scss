@@ -1,9 +1,11 @@
-@mixin table-mixin($light, $dark) {
+@mixin table-mixin($light, $dark, $warn) {
   $light-config: mat-get-color-config($light);
   $light-primary: map-get($light-config, primary);
 
   $dar-config: mat-get-color-config($dark);
   $dark-primary: map-get($dar-config, primary);
+
+  $warn: mat-color($warn);
 
   $striped-background-1: #E7F5F5;
 
@@ -13,7 +15,6 @@
         th,
         td {
           &.data-cell {
-
             &.striped-cell {
               background: repeating-linear-gradient(
                   -45deg,
@@ -38,6 +39,14 @@
                     mat-color($light-primary) 2.5px,
                     mat-color($light-primary) 10px
                 );
+              }
+            }
+
+            .inner-data-cell {
+              mat-progress-bar {
+                .mat-progress-bar-buffer {
+                  background-color: $warn;
+                }
               }
             }
           }
@@ -68,4 +77,4 @@
   }
 }
 
-@include table-mixin($pivot-table-light-theme, $pivot-table-dark-theme)
+@include table-mixin($pivot-table-light-theme, $pivot-table-dark-theme, $pivot-table-warn)

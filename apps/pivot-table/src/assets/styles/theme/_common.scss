@@ -2,7 +2,69 @@
 
 @include mat-core();
 
-$pivot-table-primary: mat-palette($mat-indigo);
-$pivot-table-accent: mat-palette($mat-pink, A200, A100, A400);
+$pivot-table-primary: mat-palette((
+  50 : #e0f9f5,
+  100 : #b3f0e7,
+  200 : #80e6d7,
+  300 : #4ddbc6,
+  400 : #26d4ba,
+  500 : #00ccae,
+  600 : #00c7a7,
+  700 : #00c09d,
+  800 : #00b994,
+  900 : #00ad84,
+  A100 : #d7fff4,
+  A200 : #a4ffe6,
+  A400 : #71ffd8,
+  A700 : #58ffd1,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+));
+$pivot-table-accent: mat-palette((
+  50 : #effaf1,
+  100 : #d7f3db,
+  200 : #bdecc3,
+  300 : #a3e4ab,
+  400 : #8fde99,
+  500 : #7bd887,
+  600 : #73d47f,
+  700 : #68ce74,
+  800 : #5ec86a,
+  900 : #4bbf57,
+  A100 : #ffffff,
+  A200 : #e6ffe9,
+  A400 : #b3ffbb,
+  A700 : #9affa4,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 : #000000,
+    700 : #000000,
+    800 : #000000,
+    900 : #000000,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+), A700, A600, A900);
 
 $pivot-table-warn: mat-palette($mat-red);
