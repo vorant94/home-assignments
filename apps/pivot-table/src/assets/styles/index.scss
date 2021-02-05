@@ -1,7 +1,6 @@
-@import "common";
-
-@import "dark";
-@import "default";
+@import "theme/common";
+@import "theme/dark";
+@import "theme/default";
 
 @import "components/app.component";
 @import "components/table.component";
